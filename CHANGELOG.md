@@ -1,3 +1,8 @@
+## <small>1.0.2 (2026-05-02)</small>
+
+* fix: add env node line to the cli.ts,c update gitignore, add logs (#3) ([78854d8](https://github.com/abobadilla02/posthog-flag-types/commit/78854d8)), closes [#3](https://github.com/abobadilla02/posthog-flag-types/issues/3)
+* fix: add env node shebang to cli.ts, update .gitignore and add logs ([50719b0](https://github.com/abobadilla02/posthog-flag-types/commit/50719b0))
+
 ## <small>1.0.1 (2026-05-02)</small>
 
 * chore: updated node to the newest version ([4ff3b1d](https://github.com/abobadilla02/posthog-flag-types/commit/4ff3b1d))

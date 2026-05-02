@@ -13,6 +13,7 @@ PostHog's SDK gives you typed methods but untyped flag key strings — magic str
 - ✅ **Local Overrides:** Control flags in development without touching the PostHog dashboard.
 - ✅ **Watch Mode:** Automatically sync flags when they change in PostHog.
 - ✅ **Multivariate Support:** Union types for variants (e.g., `'control' | 'variant-a'`).
+- ✅ **Dev Panel:** Toggle flags in the browser with a secret keyboard shortcut.
 
 ## Installation
 
@@ -67,8 +68,48 @@ const variant = flags.getVariant(FLAGS.CHECKOUT_EXPERIMENT);
 // variant type is: 'control' | 'variant-a' | 'variant-b' | undefined
 ```
 
-## Generated Code Example
+## Dev Panel (Experimental)
 
+The `FlagDevPanel` is a floating UI that lets you toggle flags dynamically in the browser.
+
+### 1. Integration
+
+```tsx
+import { useState } from 'react';
+import { FlagDevPanel } from 'posthog-flag-types/devpanel';
+import { FLAGS, FLAG_METADATA, type FlagOverrides } from './posthog-flags';
+
+function App() {
+  const [liveOverrides, setLiveOverrides] = useState<FlagOverrides>({});
+
+  const flags = createFlagClient(posthog, {
+    overrides: fileOverrides,
+    liveOverrides,
+  });
+
+  return (
+    <>
+      <YourApp flags={flags} />
+      <FlagDevPanel
+        flags={FLAGS}
+        metadata={FLAG_METADATA}
+        overrides={liveOverrides}
+        onOverridesChange={setLiveOverrides}
+        enabled={process.env.NODE_ENV === 'development'}
+      />
+    </>
+  );
+}
+```
+
+### 2. Usage
+
+- **Trigger:** Press `Shift` twice quickly, then `F` (`Shift+Shift+F`).
+- **Persistence:** Changes are saved to `localStorage` and survive page refreshes.
+- **Priority:** Live Overrides (Panel) > File Overrides (`.overrides.ts`) > PostHog.
+
+## Generated Code Example
+...
 ### `posthog-flags.ts`
 
 ```typescript

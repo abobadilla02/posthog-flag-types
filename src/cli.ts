@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { Command } from 'commander';
 import chalk from 'chalk';
 import { loadConfig } from './config';
@@ -50,6 +51,7 @@ let lastHash = '';
 
 async function run() {
   try {
+    console.log(chalk.blue(`Fetching flags from PostHog (Project ID: ${config.projectId})...`));
     const flags = await fetchFlags({
       apiKey: config.apiKey,
       projectId: config.projectId,
@@ -57,8 +59,15 @@ async function run() {
       includeInactive: config.includeInactive,
     });
 
+    console.log(chalk.blue(`Found ${flags.length} flags.`));
+
+    if (flags.length === 0) {
+      console.warn(chalk.yellow('No flags found in this project. Use --include-inactive if you want to include deleted/inactive flags.'));
+    }
+
     const currentHash = hashFlags(flags);
     if (currentHash === lastHash) {
+      console.log(chalk.gray('No changes detected since last sync.'));
       return;
     }
     lastHash = currentHash;
@@ -66,7 +75,7 @@ async function run() {
     const outputContent = generateTypeScript(flags);
     const outputPath = resolvedPath(config.output!);
     writeFile(outputPath, outputContent);
-    console.log(chalk.green(`✓ Generated flags at ${config.output}`));
+    console.log(chalk.green(`✓ Generated flags at: ${outputPath}`));
 
     if (config.overrides) {
       const overridesPath = resolvedPath(config.overridesOutput!);
@@ -84,7 +93,7 @@ async function run() {
       );
       writeFile(overridesPath, overridesContent);
       ensureGitignored(overridesPath);
-      console.log(chalk.green(`✓ Generated overrides at ${config.overridesOutput}`));
+      console.log(chalk.green(`✓ Generated overrides at: ${overridesPath}`));
     }
   } catch (error: any) {
     console.error(chalk.red(`Error: ${error.message}`));

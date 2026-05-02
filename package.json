@@ -1,0 +1,46 @@
+{
+  "name": "posthog-flag-types",
+  "version": "0.1.0",
+  "description": "Generate type-safe TypeScript constants from PostHog feature flags.",
+  "main": "./dist/index.js",
+  "bin": {
+    "posthog-flag-types": "./dist/cli.js"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./runtime": "./dist/runtime.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "start": "ts-node src/cli.ts",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^11.1.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^20.5.3",
+    "@commitlint/config-conventional": "^20.5.3",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^12.0.6",
+    "@semantic-release/npm": "^13.1.5",
+    "@semantic-release/release-notes-generator": "^14.1.0",
+    "@types/node": "^20.10.0",
+    "semantic-release": "^25.0.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.3.2",
+    "vitest": "^0.34.6"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

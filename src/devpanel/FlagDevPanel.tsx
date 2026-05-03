@@ -55,8 +55,9 @@ export function FlagDevPanel({
 
   const handleToggle = (key: string, currentValue: boolean) => {
     const nextOverrides = { ...overrides };
+    
     // If it's already overridden, clear it.
-    // Otherwise, set it to the opposite of current value (e.g., if true, set to false).
+    // Otherwise, force it to the inverse of the current value.
     if (nextOverrides[key] !== undefined) {
       delete nextOverrides[key];
     } else {
@@ -107,7 +108,6 @@ export default overrides;`;
             placeholder="Search flags..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            autoFocus
           />
         </div>
 

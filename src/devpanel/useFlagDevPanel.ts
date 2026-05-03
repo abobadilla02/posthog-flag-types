@@ -12,6 +12,9 @@ export function useFlagDevPanel(trigger: string = 'Shift+Shift+F') {
     let shiftCount = 0;
 
     const handleKeyDown = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      if (['INPUT', 'TEXTAREA'].includes(target.tagName)) return;
+
       if (e.key === 'Escape' && isOpen) {
         close();
         return;
@@ -26,6 +29,8 @@ export function useFlagDevPanel(trigger: string = 'Shift+Shift+F') {
         }
         lastShiftTime = now;
       } else if (e.key.toLowerCase() === 'f' && shiftCount >= 2) {
+        e.preventDefault();
+        e.stopPropagation();
         toggle();
         shiftCount = 0;
       } else {
@@ -33,8 +38,8 @@ export function useFlagDevPanel(trigger: string = 'Shift+Shift+F') {
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyDown);
+    return () => window.removeEventListener('keyup', handleKeyDown);
   }, [isOpen, close, toggle]);
 
   return { isOpen, open, close, toggle };

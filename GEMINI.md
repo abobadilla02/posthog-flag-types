@@ -266,6 +266,20 @@ npm publish
 
 ---
 
+## Dev Panel (src/devpanel/)
+
+The Dev Panel is a browser-based UI for dynamic flag toggling.
+
+### Architecture
+- **Trigger:** Handled by `useFlagDevPanel`. Listens for `Shift` (x2) then `F`.
+- **State:** Managed by `useLocalOverrides`. Persists to `localStorage` under `posthog-flag-types:overrides`.
+- **Priority:** `liveOverrides` (Panel) > `overrides` (File) > PostHog.
+- **Tree-shaking:** Exported via a separate entry point (`./devpanel`) to avoid bloating production bundles.
+
+### Styling
+- Pure CSS in `FlagDevPanel.css` with `ph-` class prefixes.
+- Fully encapsulated, dark theme by default.
+
 ## Versioning & Commit Conventions
 
 This project uses **Semantic Versioning** (`MAJOR.MINOR.PATCH`) and

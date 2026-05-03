@@ -44,8 +44,8 @@ export function generateTypeScript(flags: ParsedFlag[]): string {
   } as const;
 
   export type FlagKey = typeof FLAGS[keyof typeof FLAGS];
-  ...
-export type FlagVariants = {
+
+  export type FlagVariants = {
 ${variantTypes}
 };
 

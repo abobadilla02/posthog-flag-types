@@ -121,6 +121,15 @@ describe('FlagClient', () => {
     expect(mockPostHog.isFeatureEnabled).not.toHaveBeenCalled();
   });
 
+  it('prioritizes liveOverrides over file overrides', () => {
+    const client = new FlagClient(mockPostHog, {
+      overrides: { 'some-flag': false },
+      liveOverrides: { 'some-flag': true }
+    });
+    expect(client.isEnabled('some-flag')).toBe(true);
+    expect(mockPostHog.isFeatureEnabled).not.toHaveBeenCalled();
+  });
+
   it('logs debug message when enabled', () => {
     const spy = vi.spyOn(console, 'log').mockImplementation(() => {});
     const client = new FlagClient(mockPostHog, {

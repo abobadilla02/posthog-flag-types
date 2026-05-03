@@ -49,15 +49,22 @@ export function FlagDevPanel({
 
   if (!enabled || !isOpen) return null;
 
-  const handleToggle = (key: string, current: any) => {
+  const handleToggle = (key: string, currentValue: boolean) => {
     const nextOverrides = { ...overrides };
+    // If it's already overridden, clear it.
+    // Otherwise, set it to the opposite of current value (e.g., if true, set to false).
     if (nextOverrides[key] !== undefined) {
       delete nextOverrides[key];
     } else {
-      nextOverrides[key] = !current;
+      nextOverrides[key] = !currentValue;
     }
     onOverridesChange(nextOverrides);
   };
+
+  // ... (inside the component body)
+  React.useEffect(() => {
+    if (isOpen) setSearch('');
+  }, [isOpen]);
 
   const handleSelect = (key: string, value: string) => {
     const nextOverrides = { ...overrides };

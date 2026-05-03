@@ -1,3 +1,8 @@
+## <small>1.1.3 (2026-05-03)</small>
+
+* fix: autofucus filter and dependencies ([3e01a23](https://github.com/abobadilla02/posthog-flag-types/commit/3e01a23))
+* fix: autofucus filter and dependencies (#15) ([034f5d1](https://github.com/abobadilla02/posthog-flag-types/commit/034f5d1)), closes [#15](https://github.com/abobadilla02/posthog-flag-types/issues/15)
+
 ## <small>1.1.2 (2026-05-03)</small>
 
 * fix: is open set search fix for tests ([f68b7e5](https://github.com/abobadilla02/posthog-flag-types/commit/f68b7e5))

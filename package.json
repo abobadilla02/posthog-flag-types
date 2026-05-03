@@ -16,7 +16,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp src/devpanel/FlagDevPanel.css dist/devpanel/FlagDevPanel.css",
     "test": "vitest run",
     "test:watch": "vitest",
     "start": "ts-node src/cli.ts",

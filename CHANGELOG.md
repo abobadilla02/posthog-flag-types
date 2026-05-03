@@ -1,3 +1,10 @@
+## <small>1.1.2 (2026-05-03)</small>
+
+* fix: is open set search fix for tests ([f68b7e5](https://github.com/abobadilla02/posthog-flag-types/commit/f68b7e5))
+* fix: is open set search fix for tests (#14) ([22d0490](https://github.com/abobadilla02/posthog-flag-types/commit/22d0490)), closes [#14](https://github.com/abobadilla02/posthog-flag-types/issues/14)
+* fix: search filter empty and boolean flag fix ([9c785c4](https://github.com/abobadilla02/posthog-flag-types/commit/9c785c4))
+* fix: search filter empty and boolean flag fix (#13) ([5298f35](https://github.com/abobadilla02/posthog-flag-types/commit/5298f35)), closes [#13](https://github.com/abobadilla02/posthog-flag-types/issues/13)
+
 ## <small>1.1.1 (2026-05-03)</small>
 
 * fix: delete unused ... and build css ([a1b76ac](https://github.com/abobadilla02/posthog-flag-types/commit/a1b76ac))

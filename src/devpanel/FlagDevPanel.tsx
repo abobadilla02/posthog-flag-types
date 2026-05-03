@@ -31,6 +31,10 @@ export function FlagDevPanel({
   const { isOpen, close } = useFlagDevPanel(trigger);
   const [search, setSearch] = useState('');
 
+  React.useEffect(() => {
+    if (isOpen) setSearch('');
+  }, [isOpen]);
+
   const flagList = useMemo(() => {
     return Object.entries(flags).map(([constName, key]) => ({
       constName,
@@ -60,11 +64,6 @@ export function FlagDevPanel({
     }
     onOverridesChange(nextOverrides);
   };
-
-  // ... (inside the component body)
-  React.useEffect(() => {
-    if (isOpen) setSearch('');
-  }, [isOpen]);
 
   const handleSelect = (key: string, value: string) => {
     const nextOverrides = { ...overrides };

@@ -8,7 +8,8 @@
   },
   "exports": {
     ".": "./dist/index.js",
-    "./runtime": "./dist/runtime.js"
+    "./runtime": "./dist/runtime.js",
+    "./devpanel": "./dist/devpanel/index.js"
   },
   "files": [
     "dist",
@@ -34,7 +35,13 @@
     "@semantic-release/github": "^11.0.0",
     "@semantic-release/npm": "^12.0.0",
     "@semantic-release/release-notes-generator": "^14.0.0",
+    "@testing-library/react": "^16.3.2",
     "@types/node": "^22.0.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "jsdom": "^29.1.1",
+    "react": "*",
+    "react-dom": "*",
     "semantic-release": "^24.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.0.0",
@@ -42,5 +49,9 @@
   },
   "engines": {
     "node": ">=24.0.0"
+  },
+  "peerDependencies": {
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5"
   }
 }

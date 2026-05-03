@@ -1,3 +1,8 @@
+## <small>1.1.1 (2026-05-03)</small>
+
+* fix: delete unused ... and build css ([a1b76ac](https://github.com/abobadilla02/posthog-flag-types/commit/a1b76ac))
+* fix: delete unused ... and build css (#12) ([b9b8574](https://github.com/abobadilla02/posthog-flag-types/commit/b9b8574)), closes [#12](https://github.com/abobadilla02/posthog-flag-types/issues/12)
+
 ## 1.1.0 (2026-05-03)
 
 * fix: added jsx option ([7f8136b](https://github.com/abobadilla02/posthog-flag-types/commit/7f8136b))

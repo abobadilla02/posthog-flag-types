@@ -74,7 +74,7 @@ describe('FlagDevPanel', () => {
     expect(container.firstChild).toBeNull();
   });
 
-  it('renders panel when trigger is fired', () => {
+  it('renders panel when trigger is fired', async () => {
     render(
       <FlagDevPanel
         flags={mockFlags}
@@ -85,16 +85,22 @@ describe('FlagDevPanel', () => {
       />
     );
     
-    // Simulate Shift+Shift+F
+    // Simulate Shift+Shift+B
     fireEvent.keyDown(window, { key: 'Shift' });
+    fireEvent.keyUp(window, { key: 'Shift' });
     fireEvent.keyDown(window, { key: 'Shift' });
+    fireEvent.keyUp(window, { key: 'Shift' });
     fireEvent.keyDown(window, { key: 'f' });
+    fireEvent.keyUp(window, { key: 'f' });
+    
+    // Allow React to process state updates
+    await new Promise((resolve) => setTimeout(resolve, 0));
 
     expect(screen.getByText(/Flag Dev Panel/)).toBeTruthy();
     expect(screen.getByText('NEW_DASHBOARD')).toBeTruthy();
   });
 
-  it('calls onOverridesChange when toggle is clicked', () => {
+  it('calls onOverridesChange when toggle is clicked', async () => {
     const handleChange = vi.fn();
     render(
       <FlagDevPanel
@@ -108,8 +114,14 @@ describe('FlagDevPanel', () => {
     
     // Open
     fireEvent.keyDown(window, { key: 'Shift' });
+    fireEvent.keyUp(window, { key: 'Shift' });
     fireEvent.keyDown(window, { key: 'Shift' });
+    fireEvent.keyUp(window, { key: 'Shift' });
     fireEvent.keyDown(window, { key: 'f' });
+    fireEvent.keyUp(window, { key: 'f' });
+
+    // Allow React to process state updates
+    await new Promise((resolve) => setTimeout(resolve, 0));
 
     const checkbox = screen.getByRole('checkbox');
     fireEvent.click(checkbox);

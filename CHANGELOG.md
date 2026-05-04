@@ -1,3 +1,8 @@
+## <small>1.1.4 (2026-05-04)</small>
+
+* fix: change boolean toggle for a combobox ([67a236c](https://github.com/abobadilla02/posthog-flag-types/commit/67a236c))
+* fix: change boolean toggle for a combobox (#16) ([e650fe0](https://github.com/abobadilla02/posthog-flag-types/commit/e650fe0)), closes [#16](https://github.com/abobadilla02/posthog-flag-types/issues/16)
+
 ## <small>1.1.3 (2026-05-03)</small>
 
 * fix: autofucus filter and dependencies ([3e01a23](https://github.com/abobadilla02/posthog-flag-types/commit/3e01a23))

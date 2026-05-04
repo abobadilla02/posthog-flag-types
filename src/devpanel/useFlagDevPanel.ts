@@ -12,8 +12,10 @@ export function useFlagDevPanel(trigger: string = 'Shift+Shift+F') {
     let shiftCount = 0;
 
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't trigger if we're in an input, UNLESS it's the specific 'f' part of our trigger
+      // that we want to intercept.
       const target = e.target as HTMLElement;
-      if (['INPUT', 'TEXTAREA'].includes(target.tagName)) return;
+      const isInput = ['INPUT', 'TEXTAREA'].includes(target.tagName);
 
       if (e.key === 'Escape' && isOpen) {
         close();
@@ -29,6 +31,7 @@ export function useFlagDevPanel(trigger: string = 'Shift+Shift+F') {
         }
         lastShiftTime = now;
       } else if (e.key.toLowerCase() === 'f' && shiftCount >= 2) {
+        // Intercept the 'f' and stop it from reaching the input
         e.preventDefault();
         e.stopPropagation();
         toggle();
@@ -38,8 +41,9 @@ export function useFlagDevPanel(trigger: string = 'Shift+Shift+F') {
       }
     };
 
-    window.addEventListener('keyup', handleKeyDown);
-    return () => window.removeEventListener('keyup', handleKeyDown);
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, close, toggle]);
 
   return { isOpen, open, close, toggle };

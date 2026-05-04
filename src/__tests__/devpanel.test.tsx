@@ -85,7 +85,7 @@ describe('FlagDevPanel', () => {
       />
     );
     
-    // Simulate Shift+Shift+B
+    // Simulate Shift+Shift+F
     fireEvent.keyDown(window, { key: 'Shift' });
     fireEvent.keyUp(window, { key: 'Shift' });
     fireEvent.keyDown(window, { key: 'Shift' });
@@ -112,7 +112,7 @@ describe('FlagDevPanel', () => {
       />
     );
     
-    // Open
+    // Simulate Shift+Shift+F
     fireEvent.keyDown(window, { key: 'Shift' });
     fireEvent.keyUp(window, { key: 'Shift' });
     fireEvent.keyDown(window, { key: 'Shift' });
@@ -123,8 +123,8 @@ describe('FlagDevPanel', () => {
     // Allow React to process state updates
     await new Promise((resolve) => setTimeout(resolve, 0));
 
-    const checkbox = screen.getByRole('checkbox');
-    fireEvent.click(checkbox);
+    const select = screen.getByRole('combobox');
+    fireEvent.change(select, { target: { value: 'true' } });
 
     expect(handleChange).toHaveBeenCalledWith({ 'new-dashboard': true });
   });

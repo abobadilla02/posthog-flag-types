@@ -53,20 +53,7 @@ export function FlagDevPanel({
 
   if (!enabled || !isOpen) return null;
 
-  const handleToggle = (key: string, currentValue: boolean) => {
-    const nextOverrides = { ...overrides };
-    
-    // If it's already overridden, clear it.
-    // Otherwise, force it to the inverse of the current value.
-    if (nextOverrides[key] !== undefined) {
-      delete nextOverrides[key];
-    } else {
-      nextOverrides[key] = !currentValue;
-    }
-    onOverridesChange(nextOverrides);
-  };
-
-  const handleSelect = (key: string, value: string) => {
+  const handleSelect = (key: string, value: any) => {
     const nextOverrides = { ...overrides };
     if (value === '_off_') {
       delete nextOverrides[key];
@@ -114,7 +101,6 @@ export default overrides;`;
         <div className="ph-flag-panel-list">
           {filteredFlags.map((flag) => {
             const hasOverride = overrides[flag.key] !== undefined;
-            const currentValue = hasOverride ? overrides[flag.key] : 'PostHog'; // Simplified
             
             return (
               <div key={flag.key} className={`ph-flag-item ${hasOverride ? 'has-override' : ''}`}>
@@ -127,14 +113,19 @@ export default overrides;`;
 
                 <div className="ph-flag-control">
                   {flag.type === 'boolean' ? (
-                    <label className="ph-switch">
-                      <input
-                        type="checkbox"
-                        checked={!!overrides[flag.key]}
-                        onChange={() => handleToggle(flag.key, !!overrides[flag.key])}
-                      />
-                      <span className="ph-slider"></span>
-                    </label>
+                    <select
+                      className="ph-select"
+                      value={overrides[flag.key] === undefined ? '_off_' : String(overrides[flag.key])}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        if (val === '_off_') handleSelect(flag.key, '_off_');
+                        else handleSelect(flag.key, val === 'true');
+                      }}
+                    >
+                      <option value="_off_">Use PostHog</option>
+                      <option value="true">Enabled</option>
+                      <option value="false">Disabled</option>
+                    </select>
                   ) : (
                     <select
                       className="ph-select"
